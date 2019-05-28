@@ -41,19 +41,30 @@ pipeline {
       }
     }
     stage('TagBuild') {
-      steps {
-        sh 'echo tagging the build'
+       steps {
+        sh '''#clean prune 
+docker system prune --all --force --volumes
+cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
+docker build -t ocel12356/my-nodejs-app . '''
       }
+      
     }
     stage('PushToDockerHub') {
-      steps {
-        sh 'echo pushing to docker hub'
+    steps {
+        sh '''
+cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
+docker push ocel12356/my-nodejs-app '''
       }
+      
     }
     stage('PublishPortRunImage') {
-      steps {
-        sh 'echo publish port and run image'
+         steps {
+        sh '''
+         docker kill $( docker ps | grep 4200  | awk \'{print $1}\' ) || true
+docker run -v ${PWD}:/app -v /app/node_modules -p 4200:4200 --rm  ocel12356/my-nodejs-app  &'''
       }
+      
+      
     }
   }
 }
