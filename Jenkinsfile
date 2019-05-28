@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh ' we have no build action '
+        sh ' echo we have no build action '
       }
     }
     stage('Analysis') {
