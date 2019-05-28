@@ -60,7 +60,7 @@ docker push ocel12356/my-nodejs-app '''
         sh '''
          docker kill $( docker ps | grep 4200  | awk \'{print $1}\' ) || true
 docker \\
-run -v ${PWD}:/app -v /app/node_modules -p 4200:4200/tcp --rm  ocel12356/my-nodejs-app  &'''
+run -v ${PWD}:/app -v /app/node_modules -p 4200:4200/tcp --rm  ocel12356/my-nodejs-app '''
       }
     }
   }
