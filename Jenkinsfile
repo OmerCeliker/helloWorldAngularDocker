@@ -1,23 +1,18 @@
 pipeline {
   agent any
   stages {
-    
-     stage('PrintEnvVariables') {
+    stage('PrintEnvVariables') {
       agent any
       steps {
         sh 'echo  $WORKSPACE'
       }
     }
-    
-    
     stage('Build') {
       steps {
         sh ' we have no build action '
       }
     }
-    
-    
-        stage('Analysis') {
+    stage('Analysis') {
       parallel {
         stage('Security') {
           steps {
@@ -45,8 +40,6 @@ pipeline {
         }
       }
     }
-    
-    
     stage('TagBuild') {
       steps {
         sh 'echo tagging the build'
