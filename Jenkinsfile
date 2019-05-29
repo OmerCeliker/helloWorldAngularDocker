@@ -43,7 +43,7 @@ pipeline {
     stage('TagBuild') {
       steps {
         sh '''#clean prune 
-docker system prune --all --force --volumes
+docker system prune --all --force --volumes || true
 cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
 docker build -t ocel12356/my-nodejs-app . '''
       }
