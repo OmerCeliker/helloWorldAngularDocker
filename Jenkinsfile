@@ -48,19 +48,21 @@ cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
 docker build -t ocel12356/my-nodejs-app . '''
       }
     }
-    stage('PushToDockerHub') {
+    stage('PushToDockerRepo') {
       steps {
         sh '''
 cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
 docker push ocel12356/my-nodejs-app '''
       }
     }
-    stage('PublishPortRunImage') {
+    stage('PublishService') {
       steps {
         sh '''
-         docker kill $( docker ps | grep 4200  | awk \'{print $1}\' ) || true
-docker \\
-run -d -v ${PWD}:/app -v /app/node_modules -p 4200:4200/tcp --rm  ocel12356/my-nodejs-app '''
+         java -jar $JENKINS_HOME/sshclient-1.0.0.jar  \
+        -d tsangular -u ubuntu -s ec2-13-59-81-50.us-east-2.compute.amazonaws.com \
+        -i $JENKINS_HOME/ohio.pem -r 1 -m ocel12356/my-nodejs-app -p 4200
+
+'''
       }
     }
   }
