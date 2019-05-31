@@ -58,7 +58,7 @@ docker push ocel12356/my-nodejs-app '''
     stage('PublishService') {
       steps {
         sh '''
-        
+        pwd
         cp -v /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2/Route53.json . 
          java -jar $JENKINS_HOME/sshclient-1.0.0.jar   -o ./Route53.json       -d tsangular -u ubuntu          -s ec2-13-59-153-143.us-east-2.compute.amazonaws.com            -i $JENKINS_HOME/ohio.pem -r 1 -m ocel12356/my-nodejs-app -p 4200
 
