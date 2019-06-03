@@ -48,7 +48,7 @@ cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
 docker build -t ocel12356/my-nodejs-app . '''
       }
     }
-    stage('PushToDockerRepo') {
+    stage('PushToRepo') {
       steps {
         sh '''
 cd /var/lib/jenkins/workspace/helloWorldAngularDocker_master@2
